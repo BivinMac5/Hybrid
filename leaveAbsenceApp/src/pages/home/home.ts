@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { SMS } from '@ionic-native/sms';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -13,19 +14,22 @@ export class HomePage {
 
   }
 
-  sendSMS(){
-    var options={
+  mobilenum: string;
+
+  sendSMS() {
+
+    // console.log("You entered " + this.mobilenum);
+    var options = {
       replaceLineBreaks: false, // true to replace \n by a new line, false by default
       android: {
         intent: ''
-        //intent: '' // Sends sms without opening default sms app
       }
     }
-    this.smsVar.send('416123456', 'Hello Mom!',options)
-      .then(()=>{
-        alert("success");
-      },()=>{
-        alert("failed");
+    this.smsVar.send(this.mobilenum, 'Hello Buddy!', options)
+      .then(() => {
+        alert("Message sent");
+      }, (error) => {
+        alert("failed " + error);
       });
   }
 
